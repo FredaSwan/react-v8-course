@@ -1,1 +1,3 @@
-{:lint-as {uix.core/defui clojure.core/defn}}
+{:lint-as {uix.core/defui clojure.core/defn}
+ :paths ["src/app"]
+ :namespaces [uix.core]}
