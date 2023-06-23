@@ -1,7 +1,6 @@
 (ns app.search-params
-  (:require [app.pet :refer [pet]]
+  (:require [app.results :refer [results]]
             [app.use-breed-list :refer [use-breed-list]]
-            [cljs.core :as cljs]
             [uix.core :as uix :refer [defui $]]
             [uix.dom]))
 
@@ -59,9 +58,14 @@
                 ($ :option)
                 (map #($ :option {:key % :value %} %) breeds)))
           ($ :button "Submit"))
+       
+       ;; new version of pet rendering
+       ($ results pets)
 
-       (map #($ pet {:name (:name %)
+       ;; old version of pet rendering
+       #_(map #($ pet {:name (:name %)
                      :breed (:breed %)
                      :animal (:animal %)
                      :key (:id %)})
-            pets))))
+            pets)
+       )))
