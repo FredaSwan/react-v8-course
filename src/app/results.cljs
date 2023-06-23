@@ -13,6 +13,6 @@
                        :name     (:name %)
                        :breed    (:breed %)
                        :images   (:images %)
-                       :location {(:city %) (:state %)}
+                       :location (str (:city %) ", " (:state %))
                        :key      (:id %)})
               pets)))))
