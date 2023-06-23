@@ -1,5 +1,6 @@
-(ns app.pet 
-  (:require [uix.core :as uix :refer [defui $]]
+(ns app.pet
+  (:require ["react-router-dom" :refer [Link]]
+            [uix.core :as uix :refer [defui $]]
             [uix.dom]))
 
 (defui pet [{:keys [name animal breed images location id]}]
@@ -8,7 +9,7 @@
                (first images))
         _     (println location)
         #_#_[:keys [city state]] location]
-    ($ :a {:href (str "/details/" id) :class-name "pet"}
+    ($ Link {:to (str "/details/" id) :class-name "pet"}
        ($ :div {:class-name "image-container"}
           ($ :img {:src hero :alt name}))
        ($ :div {:class-name "info"}

@@ -1,17 +1,16 @@
-(ns app.app 
-  (:require [app.pet :refer [pet]]
+(ns app.app
+  (:require [app.details :refer [details]]
             [app.search-params :refer [search-params]]
+            ["react-router-dom" :refer [BrowserRouter Routes Route]]
             [uix.core :as uix :refer [defui $]]
             [uix.dom]))
 
 (defui app []
-  ($ :.app
+  ($ BrowserRouter
      ($ :h1 "Adopt Me!")
-        ;; ($ pet {:name "Pickles" :animal "cat" :breed "Siamese"})
-        ;; ($ pet {:name "Doink" :animal "cat" :breed "Mixed"})
-        ;; ($ pet {:name "Zoë" :animal "dog" :breed "Staffordshire Bull Terrier"})
-        ;; ($ pet {:name "Frank" :animal "bird" :breed "Parrot"})
-     ($ search-params)))
+     ($ Routes
+        ($ Route {:path "/details/:id" :element ($ details)})
+        ($ Route {:path "/" :element ($ search-params)}))))
 
 (defonce root
   (uix.dom/create-root (js/document.getElementById "root")))

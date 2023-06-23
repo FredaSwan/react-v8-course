@@ -11,6 +11,7 @@
          ($ :h1 "No Pets Found")
          (map #($ pet {:animal   (:animal %)
                        :name     (:name %)
+                       :id       (:id %)
                        :breed    (:breed %)
                        :images   (:images %)
                        :location (str (:city %) ", " (:state %))
