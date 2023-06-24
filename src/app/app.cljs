@@ -14,7 +14,7 @@
 (defui app []
   ($ BrowserRouter
      ($ QueryClientProvider {:client query-client}
-        ($ :header ($ Link {:to "/"} "Adopt Me!"))
+        ($ :header ($ Link {:to "/home"} "Adopt Me!"))
         ($ Routes
            ($ Route {:path "/details/:id-:animal" :element ($ details)})
            ($ Route {:path "/home" :element ($ search-params)})))))
