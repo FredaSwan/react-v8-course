@@ -15,6 +15,7 @@
     "shadow-cljs": "2.22.9"
   },
   "dependencies": {
+    "@tanstack/react-query": "4.10.1",
     "react-router-dom": "6.4.1"
   }
 }

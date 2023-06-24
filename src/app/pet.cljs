@@ -6,9 +6,7 @@
 (defui pet [{:keys [name animal breed images location id]}]
   (let [hero (if (empty? images)
                "http://pets-images.dev-apis.com/pets/none.jpg"
-               (first images))
-        _     (println location)
-        #_#_[:keys [city state]] location]
+               (first images))]
     ($ Link {:to (str "/details/" id) :class-name "pet"}
        ($ :div {:class-name "image-container"}
           ($ :img {:src hero :alt name}))
