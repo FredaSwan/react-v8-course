@@ -4,8 +4,8 @@
             [uix.core :as uix :refer [defui $]]
             [uix.dom]))
 
-(defui results [pets-data]
-  (let [pets (:children pets-data)]
+(defui results [pets]
+  (let [pets (:children pets)]
     ($ :div {:class-name "search"} 
        (if (empty? pets)
          ($ :h1 "No Pets Found")
