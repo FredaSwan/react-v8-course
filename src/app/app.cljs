@@ -16,8 +16,8 @@
      ($ QueryClientProvider {:client query-client}
         ($ :header ($ Link {:to "/"} "Adopt Me!"))
         ($ Routes
-           ($ Route {:path "/details/:id" :element ($ details)})
-           ($ Route {:path "/" :element ($ search-params)})))))
+           ($ Route {:path "/details/:id-:animal" :element ($ details)})
+           ($ Route {:path "/home" :element ($ search-params)})))))
 
 (defonce root
   (uix.dom/create-root (js/document.getElementById "root")))

@@ -11,15 +11,17 @@
     "cat"     "🐱"
     "dog"     "🐶"
     "rabbit"  "🐰"
-    "reptile" "🦎"))
+    "reptile" "🦎"
+    "⏳"))
 
 (defui details []
   (let [id      (.-id (useParams))
-        results (useQuery (clj->js ["details" id]) fetch-pet)] 
+        animal  (.-animal (useParams))
+        result (useQuery (clj->js ["details" id]) fetch-pet)] 
     (cond 
-      (.-isLoading results) ($ :div {:class-name "loading-pane"}
-                               ($ :h2 {:class-name "loader"} "⏳"))
-      :else (let [pet (first (.-pets (.-data results)))
+      (.-isLoading result) ($ :div {:class-name "loading-pane"}
+                               ($ :h2 {:class-name "loader"} (pick-loader animal)))
+      :else (let [pet (first (.-pets (.-data result)))
                   pet-name (.-name pet)] 
               (js/console.log pet)
               ($ :div {:class-name "details"}

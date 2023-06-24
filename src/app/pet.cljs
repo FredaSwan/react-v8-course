@@ -7,7 +7,7 @@
   (let [hero (if (empty? images)
                "http://pets-images.dev-apis.com/pets/none.jpg"
                (first images))]
-    ($ Link {:to (str "/details/" id) :class-name "pet"}
+    ($ Link {:to (str "/details/" id "-" animal) :class-name "pet"}
        ($ :div {:class-name "image-container"}
           ($ :img {:src hero :alt name}))
        ($ :div {:class-name "info"}
