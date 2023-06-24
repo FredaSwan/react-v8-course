@@ -28,5 +28,4 @@
                     ($ :h2 (str ^string (.-animal pet) " – " ^string (.-breed pet) " – " (.-city pet) ", " (.-state pet))
                        ($ :p (.-description pet))
                        ($ :button (str "Adopt " pet-name)))
-                    ))))
-  ))
+                    ))))))

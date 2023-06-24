@@ -6,8 +6,7 @@
 
 (def animals ["bird" "cat" "dog" "rabbit" "reptile"])
 
-(defn request-pets [set-pets! animal location breed]
-  (println "request-pets" animal)
+(defn request-pets [set-pets! animal location breed] 
   (let [url (str "http://pets-v2.dev-apis.com/pets?animal=" animal "&location=" location "&breed=" breed)
         res (js/fetch url)]
     (-> res
@@ -39,8 +38,7 @@
              ($ :input {:id "location"
                         :value location
                         :placeholder "Location"
-                        :on-change #(do (set-location! (.. % -target -value))
-                                        (println (.. % -target -value)))}))
+                        :on-change #(set-location! (.. % -target -value))}))
           ($ :label {:html-for "animal"}
              "Animal"
              ($ :select {:id "animal"
