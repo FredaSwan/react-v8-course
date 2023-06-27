@@ -2,13 +2,9 @@
   (:require [uix.core :as uix :refer [$]]
             [uix.dom]))
 
-(defn handle-index-click [this e]
-  #_#_(js/console.log this)
-  (js/console.log e) 
-  (let [new-active (clj->js {:active (js/parseInt (.-index (.-dataset (.-target e))))})]
-    (println new-active)
-    ((.-setState this) 
-        new-active)))
+(defn handle-index-click [this e] 
+  (let [new-active (clj->js {:active (js/parseInt (.-index (.-dataset (.-target e))))})] 
+    (.setState this new-active)))
 
 (def carousel
   (uix/create-class
@@ -23,13 +19,7 @@
                              ($ :img {:src (get images active) :alt "animal"})
                              ($ :div.carousel-smaller
                                 (map-indexed (fn [index photo] 
-                                               ($ :img {:on-click #_(partial handle-index-click this)
-                                                        (fn [e]
-                                                          (let [new-active (clj->js {:active (js/parseInt (.-index (.-dataset (.-target e))))})]
-                                                            (println new-active)
-                                                            (js/console.log this)
-                                                            ((.-setState this)
-                                                             new-active)))
+                                               ($ :img {:on-click (partial handle-index-click this) 
                                                         :data-index index
                                                         :key photo
                                                         :src photo
