@@ -1,12 +1,20 @@
 (ns app.carousel
-  (:require [uix.core :as uix :refer [defui $]]
+  (:require [uix.core :as uix :refer [$]]
             [uix.dom]))
 
+(defn handle-index-click [this e]
+  #_#_(js/console.log this)
+  (js/console.log e) 
+  (let [new-active (clj->js {:active (js/parseInt (.-index (.-dataset (.-target e))))})]
+    (println new-active)
+    ((.-setState this) 
+        new-active)))
+
 (def carousel
-  (uix.core/create-class
+  (uix/create-class
     {:display-name "carousel"
      :getInitialState (fn [] (clj->js {:active 0}))
-     :default-props (clj->js {:images ["http://pets-images.dev-apis.com/pets/none.jpg"]})
+     :default-props (clj->js {:images ["http://pets-images.dev-apis.com/pets/none.jpg"]}) 
      :render (fn []
                (this-as this 
                         (let [active (.-active (.-state this))
@@ -14,8 +22,16 @@
                           ($ :div.carousel
                              ($ :img {:src (get images active) :alt "animal"})
                              ($ :div.carousel-smaller
-                                (map-indexed (fn [index photo]
-                                               ($ :img {:key photo
+                                (map-indexed (fn [index photo] 
+                                               ($ :img {:on-click #_(partial handle-index-click this)
+                                                        (fn [e]
+                                                          (let [new-active (clj->js {:active (js/parseInt (.-index (.-dataset (.-target e))))})]
+                                                            (println new-active)
+                                                            (js/console.log this)
+                                                            ((.-setState this)
+                                                             new-active)))
+                                                        :data-index index
+                                                        :key photo
                                                         :src photo
                                                         :class (if (= index active) "active" "")
                                                         :alt "animal thumbnail"}))
