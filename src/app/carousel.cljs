@@ -26,20 +26,3 @@
                                                         :class (if (= index active) "active" "")
                                                         :alt "animal thumbnail"}))
                                              images))))))}))
-
-;; class component reference example from uix lib
-#_(def error-boundary
-  (uix.core/create-class
-   {:displayName "error-boundary"
-    :getInitialState (fn [] #js {:error nil})
-    :getDerivedStateFromError (fn [error] #js {:error error})
-    :componentDidCatch (fn [error error-info]
-                         (this-as this
-                                  (let [props (.. this -props -argv)]
-                                    (when-let [on-error (:on-error props)]
-                                      (on-error error)))))
-    :render (fn []
-              (this-as this
-                       (if (.. this -state -error)
-                         ($ :div "error")
-                         (.. this -props -children))))}))

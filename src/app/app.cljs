@@ -1,5 +1,5 @@
 (ns app.app
-  (:require [app.details :refer [details]]
+  (:require [app.details :refer [details-error-boundary]]
             [app.search-params :refer [search-params]]
             ["react-router-dom" :refer [BrowserRouter Routes Route Link]]
             ["@tanstack/react-query" :refer [QueryClient QueryClientProvider]]
@@ -16,7 +16,7 @@
      ($ QueryClientProvider {:client query-client}
         ($ :header ($ Link {:to "/home"} "Adopt Me!"))
         ($ Routes
-           ($ Route {:path "/details/:id-:animal" :element ($ details)})
+           ($ Route {:path "/details/:id-:animal" :element ($ details-error-boundary)})
            ($ Route {:path "/home" :element ($ search-params)})))))
 
 (defonce root

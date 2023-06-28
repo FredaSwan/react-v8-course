@@ -2,6 +2,7 @@
   (:require ["@tanstack/react-query" :refer [useQuery]]
             ["react-router-dom" :refer [useParams]]
             [app.carousel :refer [carousel]]
+            [app.error-boundary :refer [error-boundary]]
             [app.fetch-pet :refer [fetch-pet]]
             [uix.core :as uix :refer [defui $]]
             [uix.dom]))
@@ -25,6 +26,8 @@
       :else (let [pet (first (.-pets (.-data result)))
                   pet-name (.-name pet)] 
               (js/console.log pet)
+             ;; uncoment throw error to test error boundary
+              #_(throw (js/Error. "This is a fake error to test error boundary"))
               ($ :div {:class-name "details"}
                  ($ carousel {:images (.-images pet)})
                  ($ :div
@@ -33,3 +36,7 @@
                        ($ :p (.-description pet))
                        ($ :button (str "Adopt " pet-name)))
                     ))))))
+
+(defui details-error-boundary []
+  ($ error-boundary
+     ($ details)))
