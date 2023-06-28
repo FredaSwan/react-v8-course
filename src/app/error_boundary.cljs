@@ -4,13 +4,15 @@
 
 (def error-boundary
     (uix/create-error-boundary
-     {:display-name "error-boundary-details" 
-      :derive-error-state (fn [error] {:has-error true
-                                       :error error})
-      :did-catch (fn [error error-info]
-                           (js/console.log (str "ErrorBoudary caught an error: " error ", " error-info)))}
-     (fn []
-       ($ :div.details {:style {:text-align "center"}}
-          ($ :h2 "there was an error. pls go away.")
-          ($ Link {:to "/home"} "Return to home 🏠")))))
-
+     {:display-name "error-boundary-details"
+      :derive-error-state (fn [error]
+                            {:error error})
+      :did-catch (fn [error info]
+                   (js/console.error (str "ErrorBoudary caught an error: " error ", " info)))}
+     (fn [[state _] {:keys [children]}]
+       (if (:error state)
+         ($ :div.details {:style {:text-align "center"}}
+            ($ :h2 "there was an error. pls go away.")
+            ($ :pre (pr-str state))
+            ($ Link {:to "/home"} "Return to homepage 🏠"))
+         children))))

@@ -27,7 +27,7 @@
                   pet-name (.-name pet)] 
               (js/console.log pet)
              ;; uncoment throw error to test error boundary
-              #_(throw (js/Error. "This is a fake error to test error boundary"))
+              (throw (js/Error. "This is a fake error to test error boundary"))
               ($ :div {:class-name "details"}
                  ($ carousel {:images (.-images pet)})
                  ($ :div
