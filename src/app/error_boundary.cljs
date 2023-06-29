@@ -8,7 +8,7 @@
       :derive-error-state (fn [error]
                             {:error error})
       :did-catch (fn [error info]
-                   (js/console.error (str "ErrorBoudary caught an error: " error ", " info)))}
+                   (js/console.error (str "ErrorBoudary caught an error: " error info)))}
      (fn [[state _] {:keys [children]}]
        (if (:error state)
          ($ :div.details {:style {:text-align "center"}}
