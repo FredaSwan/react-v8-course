@@ -1,5 +1,6 @@
 (ns app.search-params
   (:require ["@tanstack/react-query" :refer [useQuery]]
+            [app.adopted-pet-context :refer [adopted-pet-context]]
             [app.fetch-search :refer [fetch-search]]
             [app.results :refer [results]]
             [app.use-breed-list :refer [use-breed-list]]
@@ -27,9 +28,18 @@
                                     obj (clj->js {:animal   (or (.get form-data "animal") "")
                                                   :breed    (or (.get form-data "breed") "")
                                                   :location (or (.get form-data "location") "")})]
-                                (set-request-params! obj)))] 
+                                (set-request-params! obj)))
+        [adopted-pet _]     (uix/use-context adopted-pet-context)] 
 
-    ($ :div {:class-name "search-params"}
+    ($ :div {:class-name "search-params"} 
+       
+       (when adopted-pet
+         ($ :div.congratulations {:style {:text-align "center"}}
+            ($ :h1 (str "You've adopted " (.-name adopted-pet) "! 🎉"))
+            ($ :div {:class-name "pet-hero"}
+               ($ :img {:src (first (.-images adopted-pet))
+                        :alt (.-name adopted-pet)}))))
+       
        ($ :form
           {:on-submit form-submit-handler}
 
